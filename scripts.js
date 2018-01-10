@@ -23,6 +23,7 @@ function handleFileSelect(event) {
   Papa.parse(file, {
     header: true,
     dynamicTyping: true,
+    encoding: "ISO-8859-1",
     complete: (results) => {
       data = results;
     }
