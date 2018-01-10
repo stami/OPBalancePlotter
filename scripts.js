@@ -57,7 +57,7 @@ function balanceDataForPlot(data) {
     const dateKey = data.meta.fields[0]; // "Arvopäivä"
     const deltaKey = data.meta.fields[2]; // "Määrä  EUROA"
 
-    const deltaEur = parseFloat(transaction[deltaKey]);
+    const deltaEur = parseFloat(transaction[deltaKey].replace(",", "."));
 
     return {
       date: transaction[dateKey],
