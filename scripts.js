@@ -48,6 +48,15 @@ function handlePlotButtonClick(event) {
 }
 
 /**
+ * Parse date from finnish format to ISO.
+ * @param date Date string in format "dd.MM.yyyy".
+ */
+function parseDate(date) {
+  const [day, month, year] = date.split(".");
+  return `${year}-${month}-${day}`;
+}
+
+/**
  * Return balance data per day to be used with Plotly
  * @param data CSV data parsed by Papa
  */
@@ -60,10 +69,11 @@ function balanceDataForPlot(data) {
     const deltaKey = data.meta.fields[2]; // "Määrä  EUROA"
     const recipientKey = data.meta.fields[5]; // "Saaja/Maksaja"
 
+    const date = parseDate(transaction[dateKey]);
     const deltaEur = parseFloat(transaction[deltaKey].replace(",", "."));
 
     return {
-      date: transaction[dateKey],
+      date,
       delta: deltaEur,
       recipient: transaction[recipientKey]
     };
